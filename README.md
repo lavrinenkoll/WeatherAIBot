@@ -27,4 +27,4 @@
 Діаграма роботи:
 ![діаграма роботи](https://i.ibb.co/nMQCqfy/diagram-drawio.png)
 Один з сценаріїв взаємодії (у випадку якщо користувач новий):
-![enter image description here](https://i.ibb.co/TgrYBqF/drawio.png)
+![сценарій](https://i.ibb.co/gPPVwMX/drawio.png)
