@@ -2,9 +2,12 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import seaborn as sns
 import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
+# створення графіку погооди на сьогодні + додаткові функції для отримання даних
 
+# створення графіку
 def build_diagram(time, temperature, rain_probability, time_now, time_str, adress):
     mpl.use('Agg')
     sns.set_style("whitegrid")
@@ -18,8 +21,6 @@ def build_diagram(time, temperature, rain_probability, time_now, time_str, adres
     rain_probability_now = rain_probability[time_part // 3]
 
     fig, axs = plt.subplots(nrows=3, ncols=1, gridspec_kw={'height_ratios': [0.2, 0.4, 0.4]}, figsize=(8, 8))
-
-    from PIL import Image, ImageDraw, ImageFont
 
     icon = Image.open('res/icon.png')
     text_image = Image.new('RGBA', (2500, 500), (255, 255, 255, 0))
@@ -38,10 +39,8 @@ def build_diagram(time, temperature, rain_probability, time_now, time_str, adres
     result_image.paste(icon, (-20, 0))
     result_image.paste(text_image, (icon.width+100, 40))
 
-    # Преобразуем изображение в массив numpy
     result_array = np.array(result_image)
 
-    # Отображаем изображение на первом Axes
     axs[0].imshow(result_array)
     axs[0].axis('off')
 
@@ -70,14 +69,13 @@ def build_diagram(time, temperature, rain_probability, time_now, time_str, adres
     canvas = FigureCanvas(fig)
     canvas.draw()
 
-    # преобразуем изображение в PIL.Image
     img = Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb())
     img = img.crop((0, 60, img.width, img.height))
 
-    # возвращаем изображение
     return img, text
 
 
+# отримання даних про поточну температуру та вірогідність дощу
 def get_temperature_and_rain_probability(temperature, rain_probability, time_now):
     time_part = time_now // 3
     time_part = time_part * 3
@@ -85,6 +83,8 @@ def get_temperature_and_rain_probability(temperature, rain_probability, time_now
     rain_probability_now = rain_probability[time_part // 3]
     return temperature_now, rain_probability_now
 
+
+# отримання даних про поточний час для вказаної адреси
 def get_time_now(adress):
     import requests
     from bs4 import BeautifulSoup

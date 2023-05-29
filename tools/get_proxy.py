@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-
+#парсинг сайту з проксі, отримання списку проксі
 def get_proxy_list():
     url = 'https://free-proxy-list.net/'
     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})

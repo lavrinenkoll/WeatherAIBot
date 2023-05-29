@@ -7,19 +7,22 @@ from selenium.webdriver.support import expected_conditions as EC
 from tools.create_drivers import create_driver, create_webdriver
 from tools.get_proxy import get_proxy_list
 
+#створення картинки нейронною мережею
 
+#створення картинки
 def create_image(temperature, rain, sex, type_driver, proxy_needed):
     text = f"full length {'man' if sex == 0 else 'woman'} dressed for {temperature} degree weather" \
            f"{' with rain' if rain >=60 else ''}"
 
+    # якщо обрано локальний варіант
     if type_driver == 'local':
         if proxy_needed==1:
             try:
                 attempts = 0
-                proxy_list = get_proxy_list()
-                random.shuffle(proxy_list)
+                proxy_list = get_proxy_list() # список проксі з сайту
+                random.shuffle(proxy_list) # перемішуємо список проксі
 
-                for proxy in proxy_list:
+                for proxy in proxy_list: # проходимо по списку проксі і намагаємось зробити запит
                     try:
                         driver = create_driver(proxy)
                         url = "https://deepai.org/machine-learning-model/text2img"
@@ -43,11 +46,13 @@ def create_image(temperature, rain, sex, type_driver, proxy_needed):
                     except Exception as e:
                         print(f"Error: {e}")
                         attempts += 1
-                        if attempts == 5:
+                        if attempts == 5: # якщо не вдалося зробити запит 5 разів, то виходимо з циклу
                             break
             except Exception as e:
                 print(e)
                 return None
+
+        # якщо не потрібен проксі
         else:
             driver = create_driver()
             url = "https://deepai.org/machine-learning-model/text2img"
@@ -69,6 +74,7 @@ def create_image(temperature, rain, sex, type_driver, proxy_needed):
             response = requests.get(src)
             return response.content
 
+    # якщо обрано варіант з віддаленим вебдрайвером
     elif type_driver == 'remote':
         try:
             driver = create_webdriver()

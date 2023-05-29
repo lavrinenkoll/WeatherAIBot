@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from tools.create_drivers import create_driver, create_webdriver
 
+# отримання посилань на погоду з використанням selenium
 def create_urls_selenium(adress, type_driver):
     adress = adress.replace(' ', '+')
     adress = adress.replace(',', '')
@@ -53,6 +54,7 @@ def create_urls_selenium(adress, type_driver):
         return None, None, None
 
 
+# отримання посилань на погоду з використанням requests
 def create_urls_requests(adress):
     adress = adress.replace(' ', '+')
     adress = adress.replace(',', '')
@@ -88,6 +90,8 @@ def create_urls_requests(adress):
 
     return gismeteo_link, sinoptik_link, meta_link
 
+
+# порівняння часу виконання
 def count_efficiency():
     adress = 'Кривий Ріг, Дніпропетровська область, Україна'
     time_selenium_local = 0

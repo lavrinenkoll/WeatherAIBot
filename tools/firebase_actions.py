@@ -2,13 +2,16 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
+#дії з firebase
 
+#підключення до firebase
 cred = credentials.Certificate('private/weather-bot-46e02-firebase-adminsdk-u3xkq-3ce8852a30.json')  # Укажите путь к вашему serviceAccountKey.json
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://weather-bot-46e02-default-rtdb.firebaseio.com/'  # Укажите URL вашей Firebase Realtime Database
 })
 
 
+# створення нового користувача
 def db_table_val(user_id: int, city: str = '', sex: int = -1, learning_data: str = ''):
     ref = db.reference('tpp_testbot')
     new_data = {
@@ -21,6 +24,7 @@ def db_table_val(user_id: int, city: str = '', sex: int = -1, learning_data: str
     ref.push().set(new_data)
 
 
+# оновлення даних користувача
 def update_data(user_id: int, city: str = None, sex: int = None, learning_data: str = None):
     ref = db.reference('tpp_testbot')  # Укажите путь к вашей коллекции в Firebase Realtime Database
     user_ref = ref.order_by_child('user_id').equal_to(user_id).get()
@@ -34,6 +38,7 @@ def update_data(user_id: int, city: str = None, sex: int = None, learning_data: 
             ref.child(user_key).update({'learning_data': learning_data})
 
 
+# отримання даних користувача
 def get_data(user_id):
     ref = db.reference('tpp_testbot')
     user_ref = ref.order_by_child('user_id').equal_to(user_id).get()

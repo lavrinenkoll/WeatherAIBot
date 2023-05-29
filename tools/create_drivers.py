@@ -1,10 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+#створення драйверів
 
+# тип віддаленого вебдрайвера
 webdriver_type = 'saucelabs' #'saucelabs' 'lambdatest'
 
 
+# створення драйвера локального, за потреби з проксі
 def create_driver(proxy=None):
     options = Options()
     options.add_argument("--disable-notifications")
@@ -30,6 +33,7 @@ def create_driver(proxy=None):
     return driver
 
 
+# створення драйвера віддаленого
 def create_webdriver(proxy=None, type = webdriver_type):
     if type == 'lambdatest':
         limitsec = 40
