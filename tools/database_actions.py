@@ -1,8 +1,8 @@
 import sqlite3
 
-# дії з локальною базою даних
+# operations with the local database
 
-# створити користувача в базі даних
+# create a user in the database
 def db_table_val(user_id: int, city: str, sex: int, learning_data: str):
     conn = sqlite3.connect('database/bot_data.db')
     cursor = conn.cursor()
@@ -12,7 +12,7 @@ def db_table_val(user_id: int, city: str, sex: int, learning_data: str):
     conn.close()
 
 
-# оновити дані користувача
+# update user data
 def update_data(user_id: int, city: str = None, sex: int = None, learning_data: str = None):
     conn = sqlite3.connect('database/bot_data.db')
     cursor = conn.cursor()
@@ -26,7 +26,7 @@ def update_data(user_id: int, city: str = None, sex: int = None, learning_data: 
     conn.close()
 
 
-# отримати дані користувача
+# get user data
 def get_data(user_id):
     conn = sqlite3.connect('database/bot_data.db')
     cursor = conn.cursor()

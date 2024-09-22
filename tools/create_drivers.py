@@ -1,13 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-#створення драйверів
+#creating drivers
 
-# тип віддаленого вебдрайвера
+# type of remote webdriver
 webdriver_type = 'saucelabs' #'saucelabs' 'lambdatest'
 
 
-# створення драйвера локального, за потреби з проксі
+# creation of a local driver, if necessary from a proxy
 def create_driver(proxy=None):
     options = Options()
     options.add_argument("--disable-notifications")
@@ -18,7 +18,7 @@ def create_driver(proxy=None):
     options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                          'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"')
 
-    # отключаем автоматическое подтверждение использования кук
+    # disable automatic confirmation of cookies
     options.add_argument("--disable-web-security")
     options.add_argument("--allow-running-insecure-content")
     options.add_argument('--no-sandbox')
@@ -33,7 +33,7 @@ def create_driver(proxy=None):
     return driver
 
 
-# створення драйвера віддаленого
+# creating a remote driver
 def create_webdriver(proxy=None, type = webdriver_type):
     if type == 'lambdatest':
         limitsec = 40
@@ -56,7 +56,7 @@ def create_webdriver(proxy=None, type = webdriver_type):
         options.add_argument("--disable-infobars")
         options.add_argument("--mute-audio")
 
-        # отключаем автоматическое подтверждение использования кук
+        # disable automatic confirmation of cookies
         options.add_argument("--disable-web-security")
         options.add_argument('--disable-cookies')
         options.add_argument("--allow-running-insecure-content")

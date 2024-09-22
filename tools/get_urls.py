@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from tools.create_drivers import create_driver, create_webdriver
 
-# отримання посилань на погоду з використанням selenium
+# getting weather links using selenium
 def create_urls_selenium(adress, type_driver):
     adress = adress.replace(' ', '+')
     adress = adress.replace(',', '')
@@ -54,7 +54,7 @@ def create_urls_selenium(adress, type_driver):
         return None, None, None
 
 
-# отримання посилань на погоду з використанням requests
+# getting weather links using requests
 def create_urls_requests(adress):
     adress = adress.replace(' ', '+')
     adress = adress.replace(',', '')
@@ -91,7 +91,7 @@ def create_urls_requests(adress):
     return gismeteo_link, sinoptik_link, meta_link
 
 
-# порівняння часу виконання
+# execution time comparison
 def count_efficiency():
     adress = 'Кривий Ріг, Дніпропетровська область, Україна'
     time_selenium_local = 0
@@ -111,12 +111,12 @@ def count_efficiency():
         create_urls_requests(adress)
         time_requests += time.time() - start
 
-    print(f'Время работы алгоритма с selenium локально: {time_selenium_local/5}')
-    print(f'Время работы алгоритма с selenium удаленно: {time_selenium_remote/5}')
-    print(f'Время работы алгоритма с requests: {time_requests/5}')
+    print(f'Algorithm execution time with Selenium locally: {time_selenium_local/5}')
+    print(f'Algorithm execution time with Selenium remotely: {time_selenium_remote/5}')
+    print(f'Algorithm execution time with requests: {time_requests/5}')
 
     '''
-    Время работы алгоритма с selenium локально: 22.83811511993408
-    Время работы алгоритма с selenium удаленно: 12.849758338928222
-    Время работы алгоритма с requests: 3.3600680351257326
+    Algorithm execution time with selenium locally: 22.83811511993408
+    Algorithm execution time with selenium remotely: 12.849758338928222
+    Algorithm execution time with requests: 3.3600680351257326
     '''

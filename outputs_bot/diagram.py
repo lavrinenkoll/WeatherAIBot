@@ -5,9 +5,9 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
-# створення графіку погооди на сьогодні + додаткові функції для отримання даних
+# creating a weather schedule for today + additional functions for obtaining data
 
-# створення графіку
+# creating a schedule
 def build_diagram(time, temperature, rain_probability, time_now, time_str, adress):
     mpl.use('Agg')
     sns.set_style("whitegrid")
@@ -75,7 +75,7 @@ def build_diagram(time, temperature, rain_probability, time_now, time_str, adres
     return img, text
 
 
-# отримання даних про поточну температуру та вірогідність дощу
+# obtaining data about the current temperature and the probability of rain
 def get_temperature_and_rain_probability(temperature, rain_probability, time_now):
     time_part = time_now // 3
     time_part = time_part * 3
@@ -84,7 +84,7 @@ def get_temperature_and_rain_probability(temperature, rain_probability, time_now
     return temperature_now, rain_probability_now
 
 
-# отримання даних про поточний час для вказаної адреси
+# getting data about the current time for the specified address
 def get_time_now(adress):
     import requests
     from bs4 import BeautifulSoup

@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-#парсинг посилань з погодою
+#parsing links with weather
 
-#парсинг усіх посилань + підрахунок середнього значення
+#parsing all links + calculating the average value
 def parse_all(url_gismeteo, url_sinoptik, url_meta):
 
     try:
@@ -24,7 +24,7 @@ def parse_all(url_gismeteo, url_sinoptik, url_meta):
     return dict_average
 
 
-#підрахунок середнього значення
+#calculating the average value
 def get_average(data):
     dict_average = {}
     number_of_sources = 0
@@ -50,7 +50,7 @@ def get_average(data):
     return dict_average
 
 
-#парсинг гісметео
+#hismeteo parsing
 def parse_gismeteo(url):
     dict_gismeteo = {}
     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -76,7 +76,7 @@ def parse_gismeteo(url):
     return dict_gismeteo
 
 
-#парсинг сіноптик
+#weather forecaster parsing
 def parse_sinoptik(url):
     dict_sinoptik = {}
     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -102,7 +102,7 @@ def parse_sinoptik(url):
     return dict_sinoptik
 
 
-#парсинг мета
+#parsing target
 def parse_meta(url):
     dict_meta = {}
     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
